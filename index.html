@@ -3,27 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Blocked Websites List</title>
+  <title>Blocked Websites</title>
 </head>
 <body>
 
   <h1>Blocked Websites</h1>
-  <pre id="blocked-list" style="white-space: pre-wrap;"></pre>
 
-  <script>
-    fetch('https://gist.githubusercontent.com/therealsunjester/160abdf5e81be7f9b93be1105229d8d4/raw/1cb01a3356f83d19ba28d25ab11b4da3e43ea585/blocked')
-      .then(response => {
-        if (!response.ok) throw new Error('Failed to load blocked list');
-        return response.text();
-      })
-      .then(text => {
-        document.getElementById('blocked-list').textContent = text;
-      })
-      .catch(err => {
-        document.getElementById('blocked-list').textContent = 'Could not load the blocked list.';
-        console.error(err);
-      });
-  </script>
+  <pre style="white-space: pre-wrap; max-width: 600px;">
+www.facebook.com
+  </pre>
 
 </body>
 </html>
