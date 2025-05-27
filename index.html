@@ -3,26 +3,27 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Blocked Websites JSON</title>
+  <title>Blocked Websites</title>
 </head>
 <body>
 
-  <h1>Blocked Websites (JSON format)</h1>
+  <h1>Blocked Websites</h1>
 
-  <pre id="blocked-json" style="white-space: pre-wrap; max-width: 600px;"></pre>
+  <pre id="blocked-list" style="white-space: pre-wrap; max-width: 600px;"></pre>
 
   <script>
-    fetch('https://raw.githubusercontent.com/pratikdabhole/externalfeeds/main/blockedlist.txt')
+    const blockedListUrl = 'https://raw.githubusercontent.com/pratikdabhole/externalfeeds/main/blockedlist.txt';
+
+    fetch(blockedListUrl)
       .then(response => {
         if (!response.ok) throw new Error('Failed to load blocked list');
         return response.text();
       })
       .then(text => {
-        const sites = text.split('\n').map(line => line.trim()).filter(Boolean);
-        document.getElementById('blocked-json').textContent = JSON.stringify(sites, null, 2);
+        document.getElementById('blocked-list').textContent = text;
       })
       .catch(error => {
-        document.getElementById('blocked-json').textContent = 'Could not load blocked websites list.';
+        document.getElementById('blocked-list').textContent = 'Could not load blocked websites list.';
         console.error(error);
       });
   </script>
