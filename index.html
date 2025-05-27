@@ -1,17 +1,40 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Blocked Websites</title>
+  <title>Static Page with External Feed</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #fafafa;
+      color: #222;
+      text-align: center;
+    }
+    h1 {
+      color: #2a7ae2;
+    }
+    #feed-container {
+      margin-top: 20px;
+      padding: 15px;
+      border: 1px solid #ccc;
+      background: #fff;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: left;
+      min-height: 100px;
+    }
+  </style>
 </head>
 <body>
-
-  <h1>Blocked Websites</h1>
-
-  <pre style="white-space: pre-wrap; max-width: 600px;">
-www.facebook.com
-  </pre>
-
+  <h1>Welcome to My GitHub Page</h1>
+  <p>This page loads content from an external JavaScript file <code>externalfeed.js</code>.</p>
+  
+  <div id="feed-container">
+    <!-- Content loaded by externalfeed.js will appear here -->
+  </div>
+  
+  <script src="externalfeed.js"></script>
 </body>
 </html>
