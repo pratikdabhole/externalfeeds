@@ -1,3 +1,5 @@
-www.facebook.com
-www.twitter.com
-www.myspace.com
+[
+  "www.facebook.com",
+  "www.twitter.com",
+  "www.myspace.com"
+]
