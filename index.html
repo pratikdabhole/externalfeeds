@@ -3,61 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Blocked Websites</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #fff5f5;
-      color: #222;
-      padding: 2em;
-      max-width: 700px;
-      margin: auto;
-    }
-    h1 {
-      text-align: center;
-      color: #cc0000;
-    }
-    ul {
-      list-style-type: none;
-      padding: 0;
-    }
-    li {
-      background: #ffe5e5;
-      margin: 1em 0;
-      padding: 1em;
-      border-left: 5px solid #cc0000;
-      font-weight: bold;
-      font-size: 1.1em;
-    }
-  </style>
+  <title>Blocked Websites List</title>
 </head>
 <body>
 
   <h1>Blocked Websites</h1>
-  <ul id="blocked-list">
-    <!-- List will be loaded here -->
-  </ul>
+  <pre id="blocked-list" style="white-space: pre-wrap;"></pre>
 
   <script>
-    fetch('blocked-sites.json')
+    fetch('https://gist.githubusercontent.com/therealsunjester/160abdf5e81be7f9b93be1105229d8d4/raw/1cb01a3356f83d19ba28d25ab11b4da3e43ea585/blocked')
       .then(response => {
-        if (!response.ok) {
-          throw new Error('Could not load blocked-sites.json');
-        }
-        return response.json();
+        if (!response.ok) throw new Error('Failed to load blocked list');
+        return response.text();
       })
-      .then(data => {
-        const list = document.getElementById('blocked-list');
-        data.forEach(site => {
-          const li = document.createElement('li');
-          li.textContent = site;
-          list.appendChild(li);
-        });
+      .then(text => {
+        document.getElementById('blocked-list').textContent = text;
       })
-      .catch(error => {
-        document.getElementById('blocked-list').innerHTML =
-          '<li>Failed to load blocked websites list.</li>';
-        console.error(error);
+      .catch(err => {
+        document.getElementById('blocked-list').textContent = 'Could not load the blocked list.';
+        console.error(err);
       });
   </script>
 
