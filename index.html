@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Blocked Websites</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff5f5;
+      color: #222;
+      padding: 2em;
+      max-width: 700px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+      color: #cc0000;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      background: #ffe5e5;
+      margin: 1em 0;
+      padding: 1em;
+      border-left: 5px solid #cc0000;
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Blocked Websites</h1>
+  <ul id="blocked-list">
+    <!-- List will be loaded here -->
+  </ul>
+
+  <script>
+    fetch('blocked-sites.json')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Could not load blocked-sites.json');
+        }
+        return response.json();
+      })
+      .then(data => {
+        const list = document.getElementById('blocked-list');
+        data.forEach(site => {
+          const li = document.createElement('li');
+          li.textContent = site;
+          list.appendChild(li);
+        });
+      })
+      .catch(error => {
+        document.getElementById('blocked-list').innerHTML =
+          '<li>Failed to load blocked websites list.</li>';
+        console.error(error);
+      });
+  </script>
+
+</body>
+</html>
