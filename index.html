@@ -1,8 +1,31 @@
-fetch('https://raw.githubusercontent.com/pratikdabhole/externalfeeds/main/blockedlist.txt')
-  .then(res => res.text())
-  .then(text => {
-    // Split by newlines, trim, and filter out empty lines
-    const sites = text.split('\n').map(line => line.trim()).filter(Boolean);
-    console.log(JSON.stringify(sites, null, 2)); // pretty-print JSON
-  })
-  .catch(console.error);
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Blocked Websites JSON</title>
+</head>
+<body>
+
+  <h1>Blocked Websites (JSON format)</h1>
+
+  <pre id="blocked-json" style="white-space: pre-wrap; max-width: 600px;"></pre>
+
+  <script>
+    fetch('https://raw.githubusercontent.com/pratikdabhole/externalfeeds/main/blockedlist.txt')
+      .then(response => {
+        if (!response.ok) throw new Error('Failed to load blocked list');
+        return response.text();
+      })
+      .then(text => {
+        const sites = text.split('\n').map(line => line.trim()).filter(Boolean);
+        document.getElementById('blocked-json').textContent = JSON.stringify(sites, null, 2);
+      })
+      .catch(error => {
+        document.getElementById('blocked-json').textContent = 'Could not load blocked websites list.';
+        console.error(error);
+      });
+  </script>
+
+</body>
+</html>
